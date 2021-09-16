@@ -1,14 +1,17 @@
-import { destroyCookie } from "nookies";
+import { Can } from "../components/Can";
 import { useAuth } from "../context/AuthContext"
-import { AuthTokenError } from "../errors/AuthTokenError";
-import { setupAPIClient } from "../services/api";
 import { withSSRAuth } from "../utils/withSSRAuth";
 
 export default function Dashboard() {
   const { user } = useAuth();
 
   return (
-    <h1>Dashboard {user?.email}</h1>
+    <>
+      <h1>Dashboard {user?.email}</h1>
+      <Can permissions={['metrics.list']}>
+        <div>Metricas</div>
+      </Can>
+    </>
   )
 }
 
